@@ -1,69 +1,125 @@
-# React + TypeScript + Vite
+# Policy Management Dashboard Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript frontend for managing insurance policies, built to integrate with the Laravel-based Policy Management API.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application provides a clean interface to:
 
-## Expanding the ESLint configuration
+* View all policies
+* Create new policies
+* Edit existing policies
+* Delete policies
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+It fetches data from the backend API and renders a responsive dashboard to help manage policy records efficiently.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This project was created as part of a full-stack learning experience targeting:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+* React + Vite
+* TypeScript
+* API integration
+* Clean project structure and modular components
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Features
+
+* Fetch and display policies in a table
+* Create new policies via a form
+* Edit existing policies with inline forms
+* Delete policies
+* Basic error handling and loading indicators
+* Clean component-based architecture
+
+## Tech Stack
+
+* React 19
+* TypeScript
+* Vite
+* Fetch API for HTTP requests
+* Plain CSS styling (Tailwind optional)
+
+## Project Structure
+
+```
+policy-dashboard-frontend/
+├── public/             # Static assets
+├── src/
+│   ├── api/            # API request helpers (fetchPolicies, createPolicy, etc.)
+│   ├── components/     # React components
+│   │   ├── PolicyList.tsx
+│   │   └── EditPolicyForm.tsx
+│   ├── App.tsx         # App entry component
+│   ├── main.tsx        # Vite entry point
+│   └── index.css       # Global styles
+├── package.json
+└── tsconfig.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Install dependencies
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+npm install
+```
+
+### 2. Configure the API base URL
+
+If needed, adjust the base URL in `src/api/policies.ts`:
+
+```
+const BASE_URL = "http://127.0.0.1:8000/api/policies";
+```
+
+Make sure your Laravel API is running on this address.
+
+### 3. Run the app in development
+
+```
+npm run dev
+```
+
+This will start Vite's dev server:
+
+Local: [http://localhost:5173](http://localhost:5173)
+
+### 4. Build for production
+
+```
+npm run build
+```
+
+## Components
+
+### PolicyList.tsx
+
+Displays the list of policies with Edit and Delete actions.
+
+### EditPolicyForm.tsx
+
+Inline form to edit policy data.
+
+## API Endpoints
+
+This frontend expects the following Laravel API endpoints:
+
+| Method | Endpoint           | Purpose          |
+| ------ | ------------------ | ---------------- |
+| GET    | /api/policies      | List policies    |
+| POST   | /api/policies      | Create policy    |
+| GET    | /api/policies/{id} | Get policy by ID |
+| PUT    | /api/policies/{id} | Update policy    |
+| DELETE | /api/policies/{id} | Delete policy    |
+
+
+## Notes
+
+* You can customize styling in `index.css` or integrate Tailwind CSS.
+* The project structure is intentionally simple for learning and demonstration.
+
+## Acknowledgements
+
+This project is part of a full-stack practice combining:
+
+* Laravel API development
+* React TypeScript dashboard
+* RESTful CRUD operations
